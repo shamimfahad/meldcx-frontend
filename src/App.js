@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
+
+import Devices from './layouts/devices/devices.component';
+import Login from './layouts/login/login.component';
+
 import './App.css';
 
-function App() {
+const queryCache = new QueryCache();
+
+const App = () => {
+  const [token, setToken] = useState(null);
+  const queryClient = new QueryClient();
+
+  useEffect(() => {
+    console.log(token);
+  }, [token]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <QueryClientProvider client={queryClient} queryCache={queryCache}>
+        {token ? <Devices /> : <Login setToken={setToken} />}
+      </QueryClientProvider>
     </div>
   );
-}
+};
 
 export default App;
