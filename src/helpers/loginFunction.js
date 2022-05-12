@@ -1,16 +1,28 @@
 import axios from 'axios';
 
-export const LoginFunction = async (email, password, callbackFn) => {
+/**
+ * @param  {string} email
+ * @param  {string} password
+ * @param  {function} setTokenCallBackFn
+ * @param  {function} setErrorCallBackFn
+ */
+
+export const LoginFunction = async (
+  email,
+  password,
+  setTokenCallBackFn,
+  setErrorCallBackFn
+) => {
   try {
     const response = await axios.post('http://35.201.2.209:8000/login', {
       email,
       password,
     });
-    console.log(response);
     if (response.status === 200) {
-      callbackFn(response.data);
+      setTokenCallBackFn(response.data);
+      localStorage.setItem('token', response.data);
     }
   } catch (error) {
-    console.log(error.response.data);
+    setErrorCallBackFn(error.response.data);
   }
 };

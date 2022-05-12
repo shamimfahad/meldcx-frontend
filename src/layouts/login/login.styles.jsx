@@ -1,15 +1,16 @@
 import styled from 'styled-components';
-import { Button, Flex } from '../../components/utlls.styled';
+import {
+  Button,
+  AlignAndJustifyCenter,
+} from '../../components/utils/utllComponents.styles';
 
-export const LoginContainer = styled(Flex)`
-  align-items: center;
-  justify-content: center;
+export const StyledLogin = styled(AlignAndJustifyCenter)`
   flex-direction: column;
   width: 100%;
   height: 100vh;
 `;
 
-export const LoginForm = styled.form`
+export const StyledLoginForm = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,7 +34,7 @@ export const LoginForm = styled.form`
   }
 `;
 
-export const LoginHeader = styled.h1`
+export const StyledLoginHeader = styled.h1`
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 2rem;
@@ -41,6 +42,13 @@ export const LoginHeader = styled.h1`
   text-align: center;
 `;
 
-export const LoginButton = styled(Button).attrs((props) => ({
+export const StyledLoginButton = styled(Button).attrs((props) => ({
   type: 'submit',
 }))``;
+
+export const StyledErrorText = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+`;

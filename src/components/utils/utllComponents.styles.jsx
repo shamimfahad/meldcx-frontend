@@ -6,9 +6,13 @@ export const Flex = styled.div`
   flex-wrap: ${(props) => props.wrap || 'nowrap'};
   justify-content: ${(props) => props.justifyContent || 'flex-start'};
   align-items: ${(props) => props.alignItems || 'flex-start'};
+  gap: ${(props) => props.gap || '0'};
 `;
 
-export const Button = styled.button`
+export const Button = styled.button.attrs((props) => ({
+  type: props.type || 'button',
+  disabled: props.disabled || false,
+}))`
   background-color: ${(props) => props.backgroundColor || '#2F72FF'};
   border: 1px solid ${(props) => props.borderColor || 'transparent'};
   border-radius: ${(props) => props.borderRadius || '4px'};
@@ -26,4 +30,21 @@ export const Button = styled.button`
     border: 1px solid ${(props) => props.hoverBorderColor || 'transparent'};
     color: ${(props) => props.hoverColor || '#fff'};
   }
+`;
+
+export const AlignCenter = styled(Flex)`
+  align-items: center;
+`;
+
+export const JustifyCenter = styled(Flex)`
+  justify-content: center;
+`;
+
+export const AlignAndJustifyCenter = styled(Flex)`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Column = styled(Flex)`
+  flex-direction: column;
 `;

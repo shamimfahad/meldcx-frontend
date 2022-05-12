@@ -2,36 +2,47 @@ import { useState } from 'react';
 import { LoginFunction } from '../../helpers/loginFunction';
 
 import {
-  LoginContainer,
-  LoginHeader,
-  LoginForm,
-  LoginButton,
-} from './login.styled';
+  StyledLogin,
+  StyledLoginHeader,
+  StyledLoginForm,
+  StyledLoginButton,
+  StyledErrorText,
+} from './login.styles';
 
 const Login = ({ setToken, ...props }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
   });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const setTokenCallBackFn = (token) => {
     setToken(token);
+    setLoading(false);
+  };
+
+  const setErrorCallBackFn = (error) => {
+    setError(error);
+    setLoading(false);
   };
 
   const handleChange = (e) => {
+    setError('');
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { email, password } = formData;
-    LoginFunction(email, password, setTokenCallBackFn);
+    LoginFunction(email, password, setTokenCallBackFn, setErrorCallBackFn);
   };
 
   return (
-    <LoginContainer>
-      <LoginForm onSubmit={handleSubmit}>
-        <LoginHeader>Login</LoginHeader>
+    <StyledLogin>
+      <StyledLoginForm onSubmit={handleSubmit}>
+        <StyledLoginHeader>Login</StyledLoginHeader>
         <input
           type='email'
           name='email'
@@ -48,9 +59,12 @@ const Login = ({ setToken, ...props }) => {
           onChange={handleChange}
           required
         />
-        <LoginButton>Login</LoginButton>
-      </LoginForm>
-    </LoginContainer>
+        {!!error && <StyledErrorText>{error}</StyledErrorText>}
+        <StyledLoginButton>
+          {loading ? 'Logging in' : 'Login'}
+        </StyledLoginButton>
+      </StyledLoginForm>
+    </StyledLogin>
   );
 };
 
