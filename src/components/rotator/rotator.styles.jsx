@@ -44,5 +44,10 @@ export const StyledRotator = styled(AlignAndJustifyCenter)`
   ${Column} {
     animation: ${rotate} 6s linear infinite;
     animation-direction: reverse;
+    text-align: center;
+
+    span {
+      font-size: 2rem;
+    }
   }
 `;

@@ -30,11 +30,8 @@ const Rotator = ({ devices }) => {
           );
         })}
       <Column alignItems={`center`}>
-        <div style={{ fontSize: '2rem' }}>{`${
-          devices?.length ? devices?.length : 0
-        }`}</div>
-        <div>Devices</div>
-        <div>Online</div>
+        <span>{`${devices?.length ? devices?.length : 0}`}</span>
+        Devices <br /> Online
       </Column>
     </StyledRotator>
   );

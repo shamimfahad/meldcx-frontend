@@ -1,25 +1,14 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 
 import Rotator from '../../components/rotator/rotator.component';
 
 import { StyledDevices } from './devices.styles';
+import useGetDevices from '../../helpers/useGetDevices';
 
 const Devices = () => {
   const [devices, setDevices] = useState(undefined);
 
-  const { data, error, isLoading } = useQuery(
-    'todos',
-    async () => {
-      const res = await axios.get('http://35.201.2.209:8000/devices');
-      return res.data;
-    },
-    {
-      // Refetch the data every 5 second
-      refetchInterval: 5000,
-    }
-  );
+  const { data, error, isLoading } = useGetDevices();
 
   useEffect(() => {
     setDevices(data?.devices);
@@ -30,8 +19,8 @@ const Devices = () => {
       {isLoading === true ? (
         'Getting Devices'
       ) : error ? (
-        `${error}`
-      ) : data.devices ? (
+        `Could not fetch devices`
+      ) : devices ? (
         <Rotator devices={devices} />
       ) : (
         `Unexpected response from server`

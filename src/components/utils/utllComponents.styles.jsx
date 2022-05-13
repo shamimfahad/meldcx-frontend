@@ -23,7 +23,6 @@ export const Button = styled.button.attrs((props) => ({
   padding: ${(props) => props.padding || '0.5rem 1rem'};
   margin: ${(props) => props.margin || '0'};
   outline: none;
-  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'cursor')};
   transition: all 0.3s ease-in-out;
 
   &:hover {
@@ -31,6 +30,7 @@ export const Button = styled.button.attrs((props) => ({
       props.disabled ? '#999' : props.hoverBackgroundColor || '#0F5BFF'};
     border: 1px solid ${(props) => props.hoverBorderColor || 'transparent'};
     color: ${(props) => props.hoverColor || '#fff'};
+    cursor: ${(props) => (props.disabled ? 'not-allowed' : 'pointer')};
   }
 `;
 
