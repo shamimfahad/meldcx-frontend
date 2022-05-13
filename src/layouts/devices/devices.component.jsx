@@ -32,9 +32,7 @@ const Devices = () => {
       ) : error ? (
         `${error}`
       ) : data.devices ? (
-        <div>
-          <Rotator devices={devices} />
-        </div>
+        <Rotator devices={devices} />
       ) : (
         `Unexpected response from server`
       )}

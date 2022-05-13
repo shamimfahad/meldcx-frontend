@@ -20,13 +20,24 @@ export const StyledDevice = styled.div`
   margin: calc(-50px / 2);
   background: #fff;
   border-radius: 50%;
+  transform: ${(props) =>
+    props.currentAngle && props.rotatorWidth
+      ? `rotate(${props.currentAngle}deg) translate(${
+          props.rotatorWidth / 2
+        }px) rotate(${-props.currentAngle}deg)`
+      : 'none'};
 `;
 
 export const StyledRotator = styled(AlignAndJustifyCenter)`
   position: relative;
   width: 500px;
   height: 500px;
-  margin: calc(100px / 2 + 0px);
+  margin: calc(50px / 2 + 0px);
+
+  @media screen and (max-width: 500px) {
+    width: 300px;
+    height: 300px;
+  }
 
   animation: ${rotate} 6s linear infinite;
 

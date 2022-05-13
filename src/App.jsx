@@ -22,7 +22,7 @@ const App = () => {
         {token ? (
           <>
             <Devices />
-            <Footer />
+            <Footer setToken={setToken} />
           </>
         ) : (
           <Login setToken={setToken} />

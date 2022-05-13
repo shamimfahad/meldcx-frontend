@@ -7,7 +7,7 @@ import axios from 'axios';
  * @param  {function} setErrorCallBackFn
  */
 
-export const LoginFunction = async (
+export const login = async (
   email,
   password,
   setTokenCallBackFn,

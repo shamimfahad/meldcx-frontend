@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LoginFunction } from '../../helpers/loginFunction';
+import { login } from '../../helpers/loginHelper';
 
 import {
   StyledLogin,
@@ -36,7 +36,7 @@ const Login = ({ setToken, ...props }) => {
     e.preventDefault();
     setLoading(true);
     const { email, password } = formData;
-    LoginFunction(email, password, setTokenCallBackFn, setErrorCallBackFn);
+    login(email, password, setTokenCallBackFn, setErrorCallBackFn);
   };
 
   return (
@@ -60,7 +60,11 @@ const Login = ({ setToken, ...props }) => {
           required
         />
         {!!error && <StyledErrorText>{error}</StyledErrorText>}
-        <StyledLoginButton>
+        <StyledLoginButton
+          disabled={
+            formData.email.length === 0 || formData.password.length === 0
+          }
+        >
           {loading ? 'Logging in' : 'Login'}
         </StyledLoginButton>
       </StyledLoginForm>

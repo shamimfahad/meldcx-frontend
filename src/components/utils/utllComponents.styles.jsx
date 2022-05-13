@@ -13,7 +13,8 @@ export const Button = styled.button.attrs((props) => ({
   type: props.type || 'button',
   disabled: props.disabled || false,
 }))`
-  background-color: ${(props) => props.backgroundColor || '#2F72FF'};
+  background-color: ${(props) =>
+    props.disabled ? '#999' : props.backgroundColor || '#2F72FF'};
   border: 1px solid ${(props) => props.borderColor || 'transparent'};
   border-radius: ${(props) => props.borderRadius || '4px'};
   color: ${(props) => props.color || '#fff'};
@@ -22,11 +23,12 @@ export const Button = styled.button.attrs((props) => ({
   padding: ${(props) => props.padding || '0.5rem 1rem'};
   margin: ${(props) => props.margin || '0'};
   outline: none;
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? 'not-allowed' : 'cursor')};
   transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: ${(props) => props.hoverBackgroundColor || '#0F5BFF'};
+    background-color: ${(props) =>
+      props.disabled ? '#999' : props.hoverBackgroundColor || '#0F5BFF'};
     border: 1px solid ${(props) => props.hoverBorderColor || 'transparent'};
     color: ${(props) => props.hoverColor || '#fff'};
   }
