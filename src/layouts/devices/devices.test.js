@@ -1,26 +1,29 @@
 import { screen } from '@testing-library/react';
-
-import { renderWithClient } from '../../helpers/testUtils';
-import Devices from './devices.component';
-import { server } from '../../setupTests';
 import { rest } from 'msw';
 
-test('if the devices fetch succeed, show devices online', async () => {
-  renderWithClient(<Devices />);
+import { renderWithClient } from '../../helpers/testUtils';
+import { server } from '../../setupTests';
 
-  expect(await screen.findByText(/devices online/i)).toBeInTheDocument();
-});
+import Devices from './devices.component';
 
-test('if the devices fetch fails, show the error message', async () => {
-  server.use(
-    rest.get('*', (req, res, ctx) => {
-      return res(ctx.status(500));
-    })
-  );
+describe('Devices', () => {
+  test('if the devices fetch succeed, rotator component is rendered', async () => {
+    renderWithClient(<Devices />);
 
-  renderWithClient(<Devices />);
+    expect(await screen.findByTestId('rotator-component')).toBeInTheDocument();
+  });
 
-  expect(
-    await screen.findByText(/Could not fetch devices/i)
-  ).toBeInTheDocument();
+  test('if the devices fetch fails, show the error message', async () => {
+    server.use(
+      rest.get('*', (req, res, ctx) => {
+        return res(ctx.status(500));
+      })
+    );
+
+    renderWithClient(<Devices />);
+
+    expect(
+      await screen.findByText(/Could not fetch devices/i)
+    ).toBeInTheDocument();
+  });
 });

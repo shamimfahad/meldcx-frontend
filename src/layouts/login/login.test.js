@@ -25,7 +25,25 @@ describe('Login', () => {
     expect(await screen.findByRole('button', { name: /login/i })).toBeEnabled();
   });
 
-  test('setToken to be called after submitting the form', async () => {
+  test('showing error message if wrong password is given', async () => {
+    const setToken = jest.fn();
+
+    render(<Login setToken={setToken} />);
+
+    userEvent.type(screen.getByPlaceholderText(/email/i), 'abc@gmail.com');
+    userEvent.type(screen.getByPlaceholderText(/password/i), 'meld12345');
+
+    userEvent.click(
+      screen.getByRole('button', {
+        name: /login/i,
+      })
+    );
+    expect(
+      await screen.findByText(/invalid email and password combination/i)
+    ).toBeInTheDocument();
+  });
+
+  test('setToken to be called after successfully submitting the form', async () => {
     const setToken = jest.fn();
 
     render(<Login setToken={setToken} />);

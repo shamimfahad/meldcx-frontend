@@ -14,10 +14,18 @@ export const login = async (
   setErrorCallBackFn
 ) => {
   try {
-    const response = await axios.post('http://35.201.2.209:8000/login', {
-      email,
-      password,
-    });
+    const response = await axios.post(
+      'http://35.201.2.209:8000/login',
+      {
+        email,
+        password,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     if (response.status === 200) {
       setTokenCallBackFn(response.data);
       localStorage.setItem('token', response.data);

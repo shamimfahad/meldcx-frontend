@@ -17,7 +17,7 @@ const Rotator = ({ devices }) => {
   }, [rotatorRef]);
 
   return (
-    <StyledRotator ref={rotatorRef}>
+    <StyledRotator ref={rotatorRef} data-testid='rotator-component'>
       {devices &&
         devices.map((device, i) => {
           currentAngle = currentAngle + desiredAngle;
@@ -26,6 +26,7 @@ const Rotator = ({ devices }) => {
               currentAngle={currentAngle}
               rotatorWidth={rotatorWidth}
               key={device.id}
+              data-testid='device'
             />
           );
         })}

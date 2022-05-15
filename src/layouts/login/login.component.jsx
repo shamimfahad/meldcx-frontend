@@ -1,4 +1,8 @@
 import { useState } from 'react';
+
+import { MdEmail } from 'react-icons/md';
+import { BsFillPatchExclamationFill } from 'react-icons/bs';
+
 import { login } from '../../helpers/loginHelper';
 
 import {
@@ -7,6 +11,7 @@ import {
   StyledLoginForm,
   StyledLoginButton,
   StyledErrorText,
+  StyledInputWithIcon,
 } from './login.styles';
 
 const Login = ({ setToken, ...props }) => {
@@ -43,22 +48,28 @@ const Login = ({ setToken, ...props }) => {
     <StyledLogin>
       <StyledLoginForm onSubmit={handleSubmit}>
         <StyledLoginHeader>Login</StyledLoginHeader>
-        <input
-          type='email'
-          name='email'
-          placeholder='Email'
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type='password'
-          name='password'
-          placeholder='Password'
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
+        <StyledInputWithIcon>
+          <MdEmail />
+          <input
+            type='email'
+            name='email'
+            placeholder='Email Address'
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+        </StyledInputWithIcon>
+        <StyledInputWithIcon>
+          <BsFillPatchExclamationFill />
+          <input
+            type='password'
+            name='password'
+            placeholder='Password'
+            value={formData.password}
+            onChange={handleChange}
+            required
+          />
+        </StyledInputWithIcon>
         {!!error && <StyledErrorText>{error}</StyledErrorText>}
         <StyledLoginButton
           disabled={

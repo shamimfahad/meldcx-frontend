@@ -23,14 +23,17 @@ export const StyledLoginForm = styled.form`
   background: #fff;
   color: #000;
 
-  > input[type='email'],
+  input[type='email'],
   input[type='password'] {
     width: 100%;
     height: 40px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 4px;
+    background: #eceff1;
     padding: 0.5rem;
     margin-bottom: 1rem;
+    padding-left: 30px;
+    font-size: 0.9rem;
   }
 `;
 
@@ -40,6 +43,17 @@ export const StyledLoginHeader = styled.h1`
   margin-bottom: 2rem;
   color: #333;
   text-align: center;
+`;
+
+export const StyledInputWithIcon = styled.div`
+  position: relative;
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 12px;
+    margin-left: 8px;
+  }
 `;
 
 export const StyledLoginButton = styled(Button).attrs((props) => ({
